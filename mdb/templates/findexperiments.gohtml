@@ -1,0 +1,60 @@
+{{define "findexperiments"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script type="text/javascript" src="/js/common.js"></script>
+        <script type="text/javascript" src="/js/cryptography.js"></script>
+        <script>
+                function displayTitle(protocolName, timestamping) {
+                        let title = document.getElementById("title");
+                        title.innerHTML = protocolName + " at " + formatDate(timestamping);
+                }
+
+                function displayPatient(id, profile) {
+                        decrypt("pipo", profile)
+                        .then(function (value) {
+                                try {
+                                        j = JSON.parse(value);
+                                        let title = document.getElementById(id);
+                                        title.innerHTML = j.firstname + " " + j.lastname + " (" + j.birthdate + ")";
+                                } catch (error) {
+                                        console.log(error);
+                                }
+                        });
+                }
+
+                function download(protocolName, experimentID) {
+                        let uri = "/downloadexperiment?protocolName=" + protocolName + "&experimentID=" + experimentID;
+                        var link = document.createElement("a");
+                        link.download = experimentID + ".csv";
+                        link.href = uri;
+                        link.click();
+                }
+        </script>
+</head>
+<body>
+        <div id="title" class="experiments-title"></div>
+        <script>displayTitle("{{$.ProtocolName}}", "{{.Date}}");</script>
+        <div class="listing">
+                <div class="experiment">
+                        <div class="experiment-cell experiment-cell-track"></div>
+                        <div class="experiment-cell experiment-cell-title">Patient</div>
+                        <div class="experiment-cell experiment-cell-title">ID</div>
+                        <div class="experiment-cell experiment-cell-title">Practitioner</div>
+                </div>
+                {{range .Experiments}}
+                        <div class="experiment">
+                                <div class="experiment-cell experiment-cell-download"><span class="experiment-download-label" onclick="download('{{$.ProtocolName}}', '{{.ID}}');">download</span></div>
+                                <div class="experiment-cell experiment-cell-patient" id="{{.ID}}">{{.PatientProfile}}</div>
+                                <div class="experiment-cell experiment-cell-id">E:{{.ID}}<br>P:{{.PacketID}}</div>
+                                <div class="experiment-cell experiment-cell-practitioner">{{.PractitionerUsername}}</div>
+                                <script>displayPatient("{{.ID}}", "{{.PatientProfile}}");</script>
+                        </div>
+                {{end}}
+        </div>
+</body>
+</html>
+{{end}}

@@ -1,0 +1,44 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script>
+                function doPatients() {
+                        window.open("/patients", "subwindow");
+                }
+
+                function doFind() {
+                        window.open("/find", "subwindow");
+                }
+
+                function doDeposit() {
+                        window.open("/deposit", "subwindow");
+                }
+
+                function doLogout() {
+                        window.open("/signin", "_self");
+                }
+        </script>
+</head>
+<body>
+        <header>
+                <div id="header-title">Medical DB</div>
+                <div id="header-logo"><img src="/images/iguanoid.png" height="30px"/></div>
+        </header>
+        <div id="content">
+                <div id="menu">
+                        <div class="menu-item" onclick="doPatients();">Patients</div>
+                        <div class="menu-item" onclick="doFind();">Find</div>
+                        <div class="menu-item" onclick="doDeposit();">Deposit</div>
+                        <div class="menu-item" onclick="doLogout();">Logout</div>
+                </div>
+                <div id="central">
+                        <iframe id="subwindow" name="subwindow" frameborder="0"></iframe>
+                </div>
+        </div>
+</body>
+</html>
+{{end}}

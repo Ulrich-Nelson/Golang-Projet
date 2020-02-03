@@ -1,0 +1,34 @@
+{{define "find"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script type="text/javascript" src="/js/common.js"></script>
+        <script>
+            function findDate(date) {
+                // date is Unix timestamp
+                window.open("/finddate?date=" + date, "_self");
+            }
+
+            function displayDate(id, timestamping) {
+                let div = document.getElementById("d" + id);
+                div.innerHTML = formatDate(timestamping);
+            }
+        </script>
+</head>
+<body>
+    <div class="listing">
+        {{range $i, $d := .Dates}}
+            <div class="listing-row" onclick="findDate('{{$d.Unix}}');">
+                <div class="listing-cell listing-clickable" id="d{{$i}}">
+                    {{$d.Unix}}
+                </div>
+            </div>
+            <script>displayDate("{{$i}}", "{{$d.Unix}}");</script>
+        {{end}}
+    </div>
+</body>
+</html>
+{{end}}

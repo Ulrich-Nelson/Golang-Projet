@@ -1,0 +1,56 @@
+{{define "patients"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script type="text/javascript" src="/js/cryptography.js"></script>
+        <script>
+                function displayPatient(id, profile) {
+                        decrypt("pipo", profile)
+                        .then(function (value) {
+                                try {
+                                        j = JSON.parse(value);
+                                        let divFN = document.getElementById("fn" + id);
+                                        divFN.innerHTML = j.firstname;
+                                        let divLN = document.getElementById("ln" + id);
+                                        divLN.innerHTML = j.lastname;
+                                        let divBD = document.getElementById("bd" + id);
+                                        divBD.innerHTML = j.birthdate;
+                                } catch (error) {
+                                        console.log(error);
+                                }
+                                let divID = document.getElementById("id" + id);
+                                divID.innerHTML = id;
+                        });
+                }
+
+                function inspectPatient(id) {
+                        window.open("/inspectpatient?patientID=" + id, "_self");
+                }
+        </script>
+</head>
+<body>
+        <div id="patients">
+                <div class="patient">
+                        <div class="patient-cell patient-cell-track"></div>
+                        <div class="patient-cell patient-cell-title">First Name</div>
+                        <div class="patient-cell patient-cell-title">Last Name</div>
+                        <div class="patient-cell patient-cell-title">Birth Date</div>
+                        <div class="patient-cell patient-cell-title">Anonymous ID</div>
+                </div>
+                {{range .Patients}}
+                        <div class="patient">
+                                <div class="patient-cell patient-cell-inspect"><span class="patient-inspect-label" onclick="inspectPatient('{{.ID}}');">inspect</span></div>
+                                <div class="patient-cell patient-cell-name" id="fn{{.ID}}"></div>
+                                <div class="patient-cell patient-cell-name" id="ln{{.ID}}"></div>
+                                <div class="patient-cell patient-cell-birthdate" id="bd{{.ID}}"></div>
+                                <div class="patient-cell patient-cell-id" id="id{{.ID}}"></div>
+                                <script>displayPatient("{{.ID}}", "{{.Profile}}");</script>
+                        </div>
+                {{end}}
+        </div>
+</body>
+</html>
+{{end}}

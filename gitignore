@@ -1,0 +1,6 @@
+.DS_Store
+.vscode
+!/data/
+/data/*
+!/data/run.sh
+login.json

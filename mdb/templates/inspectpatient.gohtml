@@ -1,0 +1,50 @@
+{{define "inspectpatient"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script type="text/javascript" src="/js/common.js"></script>
+        <script type="text/javascript" src="/js/cryptography.js"></script>
+        <script>
+                function displayPatient(profile, practitioner_username) {
+                        decrypt("pipo", profile)
+                        .then(function (value) {
+                                try {
+                                        j = JSON.parse(value);
+                                        let title = document.getElementById("title");
+                                        title.innerHTML = j.firstname + " " + j.lastname + ", " + j.birthdate + " (Dr " + practitioner_username + ")";
+                                } catch (error) {
+                                        console.log(error);
+                                }
+                        });
+                }
+
+                function displayDate(id, timestamping) {
+                        let div = document.getElementById("ed" + id);
+                        div.innerHTML = formatDate(timestamping);
+                }
+        </script>
+</head>
+<body>
+        <div id="title" class="patient-title"></div>
+        <script>displayPatient("{{.Patient.Profile}}", "{{.Patient.PractitionerUsername}}");</script>
+        <div id="experiments">
+                <div class="experiment">
+                        <div class="experiment-cell experiment-cell-title">Date</div>
+                        <div class="experiment-cell experiment-cell-title">Practitioner</div>
+                        <div class="experiment-cell experiment-cell-title">ID</div>
+                </div>
+                {{range .Experiments}}
+                        <div class="experiment">
+                                <div class="experiment-cell experiment-cell-date" id="ed{{.ID}}"></div>
+                                <div class="experiment-cell experiment-cell-practitioner">{{.PractitionerUsername}}</div>
+                                <div class="experiment-cell experiment-cell-id">E:{{.ID}}<br>P:{{.PacketID}}</div>
+                        </div>
+                        <script>displayDate("{{.ID}}", "{{.Timestamping.Unix}}");</script>
+                {{end}}
+        </div>
+</body>
+</html>
+{{end}}

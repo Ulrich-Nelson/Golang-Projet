@@ -1,0 +1,72 @@
+{{define "deposit"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script type="text/javascript" src="/js/cryptography.js"></script>
+        <script>
+                function displayPatient(id, profile) {
+                        decrypt("pipo", profile)
+                        .then(function (value) {
+                                try {
+                                        j = JSON.parse(value);
+                                        let div = document.getElementById(id);
+                                        div.innerHTML = j.firstname + " " + j.lastname + ", " + j.birthdate;
+                                } catch (error) {
+                                        console.log(error);
+                                }
+                        });
+                }
+        </script>
+</head>
+<body>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="deposit-title">Practitioner</div>
+                <br>
+                <div>{{.Authentication.PractitionerUsername}}</div>
+                <input type="hidden" id="practitionerID" name="practitionerID" value="{{.Authentication.PractitionerID}}">
+                <br>
+                <div class="deposit-title">Choose patient</div>
+                <br>
+                <div>
+                        <select id="patientID" name="patientID" required>
+                                {{range .Patients}}
+                                        <option id="{{.ID}}" value="{{.ID}}"></option>
+                                        <script>displayPatient("{{.ID}}", "{{.Profile}}");</script>
+                                {{end}}
+                        </select>
+                </div>
+                <br>
+                <div class="deposit-title">If new experiment</div>
+                <br>
+                <div>
+                        <input class="deposit-input" type="text" id="experimentID" name="experimentID" placeholder="experimentID" maxlength="32" size="32">
+                        <br>
+                        <input class="deposit-input" type="text" id="experimentID" name="packetID" placeholder="packetID" maxlength="32" size="32">
+                </div>
+                <br>
+                <div class="deposit-title">Choose protocol</div>
+                <br>
+                <div>
+                        <select id="protocolName" name="protocolName" required>
+                                {{range .Protocols}}
+                                        <option value="{{.Name}}">{{.Name}}</option>
+                                {{end}}
+                        </select>
+                </div>
+                <br>
+                <div class="deposit-title">Choose a CSV file</div>
+                <br>
+                <div>
+                        <input type="file" id="csv" name="csv" accept="text/csv">
+                </div>
+                <br>
+                <div>
+                        <input type="submit" value="Upload CSV" name="submit">
+                </div>
+        </form>
+</body>
+</html>
+{{end}}

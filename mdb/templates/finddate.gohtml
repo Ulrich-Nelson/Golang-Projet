@@ -1,0 +1,27 @@
+{{define "finddate"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <script>
+            function findExperiments(date, protocolName) {
+                url = "/findexperiments?protocolName=" + protocolName + "&date=" + date;
+                window.open(url, "_self");
+            }
+        </script>
+</head>
+<body>
+    <div class="listing">
+        {{range .Protocols}}
+            <div class="listing-row">
+                <div class="listing-cell listing-clickable" onclick="findExperiments('{{$.Date}}', '{{.Name}}');">
+                    {{.Name}}
+                </div>
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>
+{{end}}

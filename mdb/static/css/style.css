@@ -1,0 +1,304 @@
+html, body {
+        margin: 0;
+        max-width: 100%;
+        overflow-x: hidden;
+}
+
+header {
+        align-items: center;
+        background: rgb(20, 35, 75);
+        color: white;
+        display: flex;
+        flex-direction: row;
+        height: 50px;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0px;
+        width: 100%;
+}
+
+#header-title {
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 10px;
+}
+
+#header-logo {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+}
+
+#signin {
+       height: 100vh;
+}
+
+#signin-box {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-top: calc(0.4 * 100vh);
+}
+
+.signin-input {
+        font-size: 18px;
+}
+
+.signin-submit {
+        font-size: 18px;
+}
+
+#content {
+        display: flex;
+        flex-direction: row;
+        height: calc(100vh - 50px);
+        width: 100%;
+}
+
+#menu {
+        background: rgb(40, 70, 150);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        padding: 10px;
+        width: 300px;
+}
+
+.menu-item {
+        cursor: pointer;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 18px;
+        padding: 5px;
+}
+
+#central {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+}
+
+#subwindow {
+        height: 100%;
+        padding: 10px;
+        width: 100%;
+}
+
+.listing {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 0px 10px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 10px;
+        width: 100%;
+}
+
+.listing-row {
+        background-color: white;
+        display: table-row;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        height: 40px;
+        min-height: 40px;
+}
+
+.listing-cell {
+        color: rgb(0, 100, 128);
+        display: table-cell;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        vertical-align: middle;
+}
+
+.listing-clickable {
+        cursor: pointer;
+}
+
+#patients {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 0px 10px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 10px;
+        width: 100%;
+}
+
+.patient {
+        background-color: white;
+        display: table-row;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        height: 40px;
+        min-height: 40px;
+}
+
+.patient-cell {
+        display: table-cell;
+        vertical-align: middle;
+}
+
+.patient-cell-id {
+        color: gray;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+}
+
+.patient-cell-name {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+}
+
+.patient-cell-birthdate {
+        font-family: 'Courier New', Courier, monospace;
+}
+
+.patient-cell-inspect {
+}
+
+.patient-inspect-label {
+        border-color: rgb(40, 70, 150);
+        border-radius: 5px;
+        border-style: solid;
+        border-width: 1px;
+        color: rgb(0, 100, 128);
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        padding-bottom: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 2px;
+        text-align: center;
+        visibility: hidden;
+}
+
+.patient:hover .patient-inspect-label {
+        visibility: visible;
+}
+
+.patient-cell-title {
+        font-weight: bold;
+}
+
+.patient-title {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+}
+
+#experiments {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 0px 10px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 10px;
+        width: 100%;
+}
+
+.experiment {
+        background-color: white;
+        display: table-row;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        height: 40px;
+        min-height: 40px;
+}
+
+.experiment-cell {
+        display: table-cell;
+        vertical-align: middle;
+}
+
+.experiment-cell-date {
+        font-family: 'Courier New', Courier, monospace;
+}
+
+.experiment-cell-practitioner {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+}
+
+.experiment-cell-patient {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+}
+
+.experiment-cell-id {
+        color: gray;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+}
+
+.experiment-cell-packetid {
+        color: gray;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+}
+
+.experiment-download-label {
+        border-color: rgb(40, 70, 150);
+        border-radius: 5px;
+        border-style: solid;
+        border-width: 1px;
+        color: rgb(0, 100, 128);
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        padding-bottom: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 2px;
+        text-align: center;
+        visibility: hidden;
+}
+
+.experiment:hover .experiment-download-label {
+        visibility: visible;
+}
+
+.experiment-cell-title {
+        font-weight: bold;
+}
+
+.experiments-title {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+}
+
+.deposit-title {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+}
+
+.uploaded {
+        color: rgb(0, 100, 128);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+}
+
+.deposit-input {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+}

@@ -1,0 +1,29 @@
+{{define "signin"}}
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>login page</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+        <header>
+                <div id="header-title">Medical DB</div>
+                <div id="header-logo"><img src="/images/iguanoid.png" height="30px"/></div>
+        </header>
+        <div id="signin">
+                <div id="signin-box">
+                        <form action="/signin" method="POST">
+                                <input class="signin-input" name="username" placeholder="username">
+                                <br/><br/>
+                                <input class="signin-input" name="password" placeholder="password" type="password">
+                                <br/><br/>
+                                <div>
+                                        <button class="signin-submit" type="submit">sign in</button> 
+                                </div>
+                        </form>
+                </div>
+        </div>
+</body>
+</html>
+{{end}}
